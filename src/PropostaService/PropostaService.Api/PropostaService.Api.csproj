@@ -11,4 +11,10 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\PropostaService.CrossCutting.IoC\PropostaService.CrossCutting.IoC.csproj" />
+        <ProjectReference Include="..\PropostaService.Application\PropostaService.Application.csproj" />
+    </ItemGroup>
+
+
 </Project>

@@ -8,7 +8,6 @@ public class ApplicationResult<T>
     public int StatusCode { get; private set; }
     public string? Mensagem { get; private set; }
     public T Data { get; private set; } = default!;
-    public string? Erro { get; private set; }
 
     private ApplicationResult() { }
 
@@ -20,7 +19,6 @@ public class ApplicationResult<T>
             StatusCode = statusCode,
             Mensagem = MensagemSucesso,
             Data = data,
-            Erro = null!
         };
     }
 

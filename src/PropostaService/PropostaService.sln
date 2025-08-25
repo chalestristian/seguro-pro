@@ -1,6 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropostaService.Api", "PropostaService.Api\PropostaService.Api.csproj", "{10A63EC0-C4F4-4083-8D90-A89B8596BCD3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{662DF528-BC15-46B0-9AEA-D0110E082EB2} = {662DF528-BC15-46B0-9AEA-D0110E082EB2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropostaService.Application", "PropostaService.Application\PropostaService.Application.csproj", "{7C38E945-4194-4A3C-A809-87046E037A88}"
 EndProject

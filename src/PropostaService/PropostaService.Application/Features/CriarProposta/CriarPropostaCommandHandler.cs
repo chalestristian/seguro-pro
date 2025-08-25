@@ -40,7 +40,7 @@ public class CriarPropostaCommandHandler : IRequestHandler<CriarPropostaCommand,
             
             await _propostaRepository.CriarAsync(proposta.Data);
             
-            return ApplicationResult<PropostaResponse>.CriarResponseSucesso(new PropostaResponse(proposta.Data.Id, proposta.Data.ValorSeguro, proposta.Data.Status, proposta.Data.DataCriacao), (int)HttpStatusCode.Created);
+            return ApplicationResult<PropostaResponse>.CriarResponseSucesso(new PropostaResponse(proposta.Data.Id, proposta.Data.ValorSeguro, proposta.Data.Status, proposta.Data.Status.ToString(), proposta.Data.DataCriacao), (int)HttpStatusCode.Created);
         }
         catch (Exception ex)
         {
