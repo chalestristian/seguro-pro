@@ -4,9 +4,9 @@ namespace PropostaService.Application.DTOs;
 
 public record PropostaResponse(
     Guid Id,
-    string  Nome,
+    string  NomeCliente,
     decimal ValorSeguro,
-    PropostaStatus Status,
-    string StatusNome,
+    PropostaStatus StatusProposta,
+    string NomeStatusProposta,
     DateTime DataCriacao
 );

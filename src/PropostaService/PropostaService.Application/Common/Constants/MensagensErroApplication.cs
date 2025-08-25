@@ -1,25 +1,23 @@
 namespace PropostaService.Application.Common.Constants;
 
-public class MensagensErroApplication
+public abstract class MensagensErroApplication
 {
-    public static readonly string ErroInterno = "Ocorreu um erro interno, tente novamente.";
-    
-    
-    
-    
-    
-    public static readonly string NomeVazio = "O nome do cliente não pode ser vazio.";
-    public static readonly string CpfVazio = "O CPF do cliente não pode ser vazio.";
-    public static readonly string CpfInvalido = "O CPF informado não é valido.";
-    public static readonly string ValorSeguroInvalido = "O valor do seguro deve ser maior que zero.";
-
-    public static readonly string IdVazio = "O ID da proposta é obrigatório e não pode ser vazio.";
-    
-    public static readonly string NomeLongo = "O nome do cliente não pode ser vazio.";
-    
-    public static readonly string PropostaNaoEncontrada = "Não foi possível encontrar a proposta com o id informado.";
-
-    
-
-
+    public static class Validation
+    {
+        public static readonly string PropostaIdObrigatorio = "O ID da proposta é obrigatório.";
+        public static readonly string PropostaNaoEncontrada = "A proposta com o ID informado não foi encontrada.";
+        public static readonly string NomeClienteVazio = "O nome do cliente é obrigatório.";
+        public static readonly string NomeClienteExcedeComprimentoMaximo = "O nome do cliente excede o comprimento máximo permitido.";
+        public static readonly string CpfClienteVazio = "O CPF do cliente é obrigatório.";
+        public static readonly string CpfClienteInvalido = "O formato do CPF informado é inválido.";
+        public static readonly string ValorSeguroDeveSerPositivo = "O valor do seguro deve ser um número positivo.";
+    }
+    public static class Exception
+    {
+        public static readonly string ErroInterno = "Ocorreu um erro interno, tente novamente.";
+        public static readonly string ErroCriarProposta = "Ocorreu um erro inesperado ao tentar criar a proposta para o cliente";
+        public static readonly string ErroAprovarProposta = "Ocorreu um erro inesperado ao tentar aprovar a proposta para o cliente";
+        public static readonly string ErroRejeitarProposta = "Ocorreu um erro inesperado ao tentar rejeitar a proposta para o cliente";
+        public static readonly string ErroListarPropostas = "Ocorreu um erro inesperado ao tentar listar as propostas de clientes";
+    }
 }

@@ -1,6 +1,7 @@
 using System.Net;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using PropostaService.Application.Common.Constants;
 using PropostaService.Application.Common.Wrappers;
 using PropostaService.Application.DTOs;
@@ -12,11 +13,13 @@ public class RejeitarPropostaCommandHandler : IRequestHandler<RejeitarPropostaCo
 {
     private readonly IPropostaRepository _propostaRepository;
     private readonly IValidator<RejeitarPropostaCommand> _validator;
+    private readonly ILogger<RejeitarPropostaCommandHandler> _logger;
 
-    public RejeitarPropostaCommandHandler(IPropostaRepository propostaRepository, IValidator<RejeitarPropostaCommand> validator)
+    public RejeitarPropostaCommandHandler(IPropostaRepository propostaRepository, IValidator<RejeitarPropostaCommand> validator, ILogger<RejeitarPropostaCommandHandler> logger)
     {
         _propostaRepository = propostaRepository;
         _validator = validator;
+        _logger = logger;
     }
 
     public async Task<ApplicationResult<PropostaResponse>> Handle(RejeitarPropostaCommand command, CancellationToken cancellationToken)
@@ -30,15 +33,15 @@ public class RejeitarPropostaCommandHandler : IRequestHandler<RejeitarPropostaCo
                 return ApplicationResult<PropostaResponse>.CriarResponseErro(string.Join("; ", errors), (int)HttpStatusCode.BadRequest);
             }
             
-            var proposta = await _propostaRepository.BuscaPorIdAsync(command.id);
+            var proposta = await _propostaRepository.BuscarPorIdAsync(command.id);
             
             if (proposta is null)
-                return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.PropostaNaoEncontrada, (int)HttpStatusCode.NotFound);
+                return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Validation.PropostaNaoEncontrada, (int)HttpStatusCode.NotFound);
 
-            var propostaAtualizada = proposta.Reprovar();
+            var propostaRejeitada = proposta.Rejeitar();
             
-            if(!propostaAtualizada.Sucesso)
-                return ApplicationResult<PropostaResponse>.CriarResponseErro(propostaAtualizada.MensagemErro, (int)HttpStatusCode.BadRequest);
+            if(!propostaRejeitada.Sucesso)
+                return ApplicationResult<PropostaResponse>.CriarResponseErro(propostaRejeitada.MensagemErro, (int)HttpStatusCode.BadRequest);
             
             await _propostaRepository.AtualizarAsync(proposta);
             
@@ -46,8 +49,8 @@ public class RejeitarPropostaCommandHandler : IRequestHandler<RejeitarPropostaCo
         }
         catch (Exception ex)
         {   
-            //IMPLEMENTAR LOG
-            return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.ErroInterno, (int)HttpStatusCode.InternalServerError);
+            _logger.LogError(MensagensErroApplication.Exception.ErroRejeitarProposta, ex);
+            return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Exception.ErroInterno, (int)HttpStatusCode.InternalServerError);
         }
     }
 }

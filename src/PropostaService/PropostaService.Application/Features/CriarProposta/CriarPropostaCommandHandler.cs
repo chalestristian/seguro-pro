@@ -1,6 +1,7 @@
 using System.Net;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using PropostaService.Application.Common.Constants;
 using PropostaService.Application.Common.Wrappers;
 using PropostaService.Application.DTOs;
@@ -11,15 +12,14 @@ namespace PropostaService.Application.Features.CriarProposta;
 
 public class CriarPropostaCommandHandler : IRequestHandler<CriarPropostaCommand, ApplicationResult<PropostaResponse>>
 {
-    
     private readonly IPropostaRepository _propostaRepository;
     private readonly IValidator<CriarPropostaCommand> _validator;
-
-    
-    public CriarPropostaCommandHandler(IPropostaRepository propostaRepository, IValidator<CriarPropostaCommand> validator)
+    private readonly ILogger<CriarPropostaCommandHandler> _logger;
+    public CriarPropostaCommandHandler(IPropostaRepository propostaRepository, IValidator<CriarPropostaCommand> validator, ILogger<CriarPropostaCommandHandler> logger)
     {
         _propostaRepository = propostaRepository;
         _validator = validator;
+        _logger = logger;
     }
 
     public async Task<ApplicationResult<PropostaResponse>> Handle(CriarPropostaCommand command, CancellationToken cancellationToken)
@@ -44,8 +44,8 @@ public class CriarPropostaCommandHandler : IRequestHandler<CriarPropostaCommand,
         }
         catch (Exception ex)
         {
-            //IMPLEMENTAR LOG
-            return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.ErroInterno, (int)HttpStatusCode.InternalServerError);
+            _logger.LogError(MensagensErroApplication.Exception.ErroCriarProposta, ex);
+            return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Exception.ErroInterno, (int)HttpStatusCode.InternalServerError);
         }
     }
 }

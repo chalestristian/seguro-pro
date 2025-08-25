@@ -9,14 +9,14 @@ public class CriarPropostaCommandValidator : AbstractValidator<CriarPropostaComm
     public CriarPropostaCommandValidator()
     {
         RuleFor(p => p.NomeCliente)
-            .NotEmpty().WithMessage(MensagensErroApplication.NomeVazio)
-            .MaximumLength(200).WithMessage(MensagensErroApplication.NomeLongo);
+            .NotEmpty().WithMessage(MensagensErroApplication.Validation.NomeClienteVazio)
+            .MaximumLength(200).WithMessage(MensagensErroApplication.Validation.NomeClienteExcedeComprimentoMaximo);
 
         RuleFor(p => p.CpfCliente)
-            .NotEmpty().WithMessage(MensagensErroApplication.CpfVazio)
-            .Must(CpfValidator.IsValid).WithMessage(MensagensErroApplication.CpfInvalido);
+            .NotEmpty().WithMessage(MensagensErroApplication.Validation.CpfClienteVazio)
+            .Must(CpfValidator.IsValid).WithMessage(MensagensErroApplication.Validation.CpfClienteInvalido);
 
         RuleFor(p => p.ValorSeguro)
-            .GreaterThan(0).WithMessage(MensagensErroApplication.ValorSeguroInvalido);
+            .GreaterThan(0).WithMessage(MensagensErroApplication.Validation.ValorSeguroDeveSerPositivo);
     }
 }

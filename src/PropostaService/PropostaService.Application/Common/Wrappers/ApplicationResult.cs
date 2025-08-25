@@ -2,8 +2,8 @@ namespace PropostaService.Application.Common.Wrappers;
 
 public class ApplicationResult<T>
 {
-    private static readonly string MensagemSucesso = "A requisição foi realizada com sucesso.";
-
+    private const string MensagemSucesso = "Requisição realizada com sucesso.";
+    
     public bool Sucesso { get; private set; }
     public int StatusCode { get; private set; }
     public string? Mensagem { get; private set; }

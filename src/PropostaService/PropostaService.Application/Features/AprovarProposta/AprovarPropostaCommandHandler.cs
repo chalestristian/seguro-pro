@@ -1,6 +1,7 @@
 using System.Net;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using PropostaService.Application.Common.Constants;
 using PropostaService.Application.Common.Wrappers;
 using PropostaService.Application.DTOs;
@@ -12,13 +13,15 @@ public class AprovarPropostaCommandHandler : IRequestHandler<AprovarPropostaComm
 {
     private readonly IPropostaRepository _propostaRepository;
     private readonly IValidator<AprovarPropostaCommand> _validator;
+    private readonly ILogger<AprovarPropostaCommandHandler> _logger;
 
-    public AprovarPropostaCommandHandler(IPropostaRepository propostaRepository, IValidator<AprovarPropostaCommand> validator)
+    public AprovarPropostaCommandHandler(IPropostaRepository propostaRepository, IValidator<AprovarPropostaCommand> validator, ILogger<AprovarPropostaCommandHandler> logger)
     {
         _propostaRepository = propostaRepository;
         _validator = validator;
+        _logger = logger;
     }
-
+    
     public async Task<ApplicationResult<PropostaResponse>> Handle(AprovarPropostaCommand command, CancellationToken cancellationToken)
     {
         try
@@ -30,15 +33,15 @@ public class AprovarPropostaCommandHandler : IRequestHandler<AprovarPropostaComm
                 return ApplicationResult<PropostaResponse>.CriarResponseErro(string.Join("; ", errors), (int)HttpStatusCode.BadRequest);
             }
             
-            var proposta = await _propostaRepository.BuscaPorIdAsync(command.id);
+            var proposta = await _propostaRepository.BuscarPorIdAsync(command.id);
             
             if (proposta is null)
-                return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.PropostaNaoEncontrada, (int)HttpStatusCode.NotFound);
+                return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Validation.PropostaNaoEncontrada, (int)HttpStatusCode.NotFound);
 
-            var propostaAtualizada = proposta.Aprovar();
+            var propostaAprovada = proposta.Aprovar();
             
-            if(!propostaAtualizada.Sucesso)
-                return ApplicationResult<PropostaResponse>.CriarResponseErro(propostaAtualizada.MensagemErro, (int)HttpStatusCode.BadRequest);
+            if(!propostaAprovada.Sucesso)
+                return ApplicationResult<PropostaResponse>.CriarResponseErro(propostaAprovada.MensagemErro, (int)HttpStatusCode.BadRequest);
             
             await _propostaRepository.AtualizarAsync(proposta);
             
@@ -46,8 +49,8 @@ public class AprovarPropostaCommandHandler : IRequestHandler<AprovarPropostaComm
         }
         catch (Exception ex)
         {   
-            //IMPLEMENTAR LOG
-            return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.ErroInterno, (int)HttpStatusCode.InternalServerError);
+            _logger.LogError(MensagensErroApplication.Exception.ErroAprovarProposta, ex);
+            return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Exception.ErroInterno, (int)HttpStatusCode.InternalServerError);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace PropostaService.Domain.Interfaces;
 public interface IPropostaRepository
 {
     Task CriarAsync(Proposta proposta);
-    Task<Proposta?> BuscaPorIdAsync(Guid id);
-    Task<IEnumerable<Proposta>> BuscaAsync();
+    Task<Proposta?> BuscarPorIdAsync(Guid id);
+    Task<IEnumerable<Proposta>> BuscarAsync();
     Task AtualizarAsync(Proposta proposta);
 }

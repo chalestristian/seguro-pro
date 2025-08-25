@@ -8,6 +8,6 @@ public class AprovarPropostaCommandValidator: AbstractValidator<AprovarPropostaC
     public AprovarPropostaCommandValidator()
     {
         RuleFor(command => command.id)
-            .NotEmpty().WithMessage(MensagensErroApplication.IdVazio);
+            .NotEmpty().WithMessage(MensagensErroApplication.Validation.PropostaIdObrigatorio);
     }
 }

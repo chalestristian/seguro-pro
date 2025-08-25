@@ -1,6 +1,6 @@
 namespace PropostaService.Domain.Common.Wrappers;
 
-public class CpfValidator
+public abstract class CpfValidator
 {
     public static bool IsValid(string? cpf)
     {

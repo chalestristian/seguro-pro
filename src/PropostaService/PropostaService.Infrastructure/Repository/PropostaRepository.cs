@@ -19,12 +19,12 @@ public class PropostaRepository : IPropostaRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Proposta?> BuscaPorIdAsync(Guid id)
+    public async Task<Proposta?> BuscarPorIdAsync(Guid id)
     {
         return await _context.Propostas.SingleOrDefaultAsync(p => p.Id == id);
     }
 
-    public async Task<IEnumerable<Proposta>> BuscaAsync()
+    public async Task<IEnumerable<Proposta>> BuscarAsync()
     {
         return await _context.Propostas.AsNoTracking().ToListAsync();
     }

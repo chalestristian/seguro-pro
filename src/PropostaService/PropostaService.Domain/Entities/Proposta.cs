@@ -21,7 +21,7 @@ public class Proposta
         if (string.IsNullOrWhiteSpace(nomeCliente))
             return DomainResult<Proposta>.CriarResponseErro(MensagensErroDomain.NomeClienteVazio);
         
-        if (!IsCpfValido(cpfCliente)) 
+        if (!CpfValidator.IsValid(cpfCliente)) 
             return DomainResult<Proposta>.CriarResponseErro(MensagensErroDomain.CpfInvalido);
         
         if (valorSeguro <= 0)
@@ -52,19 +52,14 @@ public class Proposta
         return DomainResult<Proposta>.CriarResponseSucesso(this);
     }
     
-    public DomainResult<Proposta> Reprovar()
+    public DomainResult<Proposta> Rejeitar()
     {
         if (Status != PropostaStatus.EmAnalise)
-            return DomainResult<Proposta>.CriarResponseErro(MensagensErroDomain.StatusNaoPermitidoParaReprovacao);
+            return DomainResult<Proposta>.CriarResponseErro(MensagensErroDomain.StatusNaoPermitidoParaRejeicao);
 
         Status = PropostaStatus.Rejeitada;
         DataAtualizacao = DateTime.UtcNow;
         
         return DomainResult<Proposta>.CriarResponseSucesso(this);
-    }
-    
-    private static bool IsCpfValido(string cpf)
-    {
-        return CpfValidator.IsValid(cpf);
     }
 }
