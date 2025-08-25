@@ -77,7 +77,9 @@ Se comunica com o **PropostaService** via API REST.
 
 ```
 https://github.com/chalestristian/seguro-pro.git
+```
 
+```
 cd seguro-pro/src
 ```
 ### 2. Build e subida dos containers
@@ -90,10 +92,9 @@ docker compose up --build
 
 ### 3. Endpoints disponíveis
 
+- [PropostaService > http://localhost:5001/swagger/index.html](http://localhost:5001/swagger/index.html)
 
-[PropostaService > http://localhost:5001/swagger/index.html](http://localhost:5001/swagger/index.html)
-
-[ContratacaoService > http://localhost:5002/swagger/index.html](http://localhost:5002/swagger/index.html)
+- [ContratacaoService > http://localhost:5002/swagger/index.html](http://localhost:5002/swagger/index.html)
 
 ### 4. CPF Para Testes
 
