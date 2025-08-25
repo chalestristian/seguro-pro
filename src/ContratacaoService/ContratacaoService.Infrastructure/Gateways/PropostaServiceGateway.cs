@@ -28,11 +28,20 @@ public class PropostaServiceGateway : IPropostaServiceGateway
         response.EnsureSuccessStatusCode();
 
         var responseStream = await response.Content.ReadAsStreamAsync();
-        
-        var resultDto = await JsonSerializer.DeserializeAsync<PropostaStatusDto>(
+    
+        var apiResponse = await JsonSerializer.DeserializeAsync<ApiResponse<PropostaDataDto>>(
             responseStream, 
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        
-        return resultDto;
+    
+        if (apiResponse != null)
+        {
+            return new PropostaStatusDto
+            {
+                id = apiResponse.Data.Id,
+                StatusProposta =  apiResponse.Data.StatusProposta
+            };
+        }
+
+        return null;
     }
 }

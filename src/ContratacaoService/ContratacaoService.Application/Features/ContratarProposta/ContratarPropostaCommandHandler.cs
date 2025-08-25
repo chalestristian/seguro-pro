@@ -38,12 +38,12 @@ public class ContratarPropostaCommandHandler : IRequestHandler<ContratarProposta
                 return ApplicationResult<ContratacaoResponse>.CriarResponseErro(string.Join("; ", errors), (int)HttpStatusCode.BadRequest);
             }
 
-            var propostaStatusDto = await _propostaGateway.GetPropostaStatusAsync(command.PropostaId);
+            var propostaStatus = await _propostaGateway.GetPropostaStatusAsync(command.PropostaId);
 
-            if (propostaStatusDto is null)
+            if (propostaStatus is null)
                 return ApplicationResult<ContratacaoResponse>.CriarResponseErro(MensagensErroApplication.PropostaNaoEncontrada, (int)HttpStatusCode.NotFound);
            
-            if (propostaStatusDto.Status != (int)PropostaStatus.Aprovada)
+            if (propostaStatus.StatusProposta != (int)PropostaStatus.Aprovada)
                 return ApplicationResult<ContratacaoResponse>.CriarResponseErro(MensagensErroApplication.PropostaNaoAprovada, (int)HttpStatusCode.BadRequest);
             
             var contratacao = Contratacao.Contratar(command.PropostaId);

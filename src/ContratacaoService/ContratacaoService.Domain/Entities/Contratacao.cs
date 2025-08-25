@@ -13,7 +13,6 @@ public class Contratacao
     
     private Contratacao(Guid propostaId)
     {
-        Id = Guid.NewGuid();
         PropostaId = propostaId;
         DataContratacao = DateTime.UtcNow;
     }

@@ -17,6 +17,7 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<ContratacaoDbContext>(options => options.UseNpgsql(connectionString));
+       
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ContratarPropostaCommand).Assembly));
         services.AddValidatorsFromAssembly(typeof(ContratarPropostaCommand).Assembly);
         services.AddScoped<IContratacaoRepository, ContratacaoRepository>();

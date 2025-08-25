@@ -1,7 +1,7 @@
 namespace ContratacaoService.Application.DTOs;
 
-public class PropostaStatusDto
+public class PropostaDataDto
 {
-    public Guid id { get; set; }
+    public Guid Id { get; set; }
     public int StatusProposta { get; set; }
 }

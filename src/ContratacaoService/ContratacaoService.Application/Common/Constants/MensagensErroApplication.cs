@@ -4,7 +4,7 @@ public abstract class MensagensErroApplication
 {
     public static readonly string PropostaIdVazio = "O ID da proposta não pode ser vazio.";
     public static readonly string PropostaNaoEncontrada = "A proposta com o id informado não foi encontrada";
-    public static readonly string PropostaNaoAprovada = "A proposta com o id informado não foi aprovada";
+    public static readonly string PropostaNaoAprovada = "A proposta com o id informado não foi aprovada e por isso não pode ser contratada";
 
 
     public static class Exception
