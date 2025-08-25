@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropostaService.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropostaService.CrossCutting.IoC", "PropostaService.CrossCutting.IoC\PropostaService.CrossCutting.IoC.csproj", "{662DF528-BC15-46B0-9AEA-D0110E082EB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropostaService.Test", "PropostaService.Test\PropostaService.Test.csproj", "{751614F3-880A-4CAF-81BA-314E448ED4B4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropostaService.UnitTests", "PropostaService.UnitTests\PropostaService.UnitTests.csproj", "{633ED9CA-364E-497D-8D99-88F596AE02C8}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{662DF528-BC15-46B0-9AEA-D0110E082EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{662DF528-BC15-46B0-9AEA-D0110E082EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{662DF528-BC15-46B0-9AEA-D0110E082EB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{751614F3-880A-4CAF-81BA-314E448ED4B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{751614F3-880A-4CAF-81BA-314E448ED4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{751614F3-880A-4CAF-81BA-314E448ED4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{751614F3-880A-4CAF-81BA-314E448ED4B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{633ED9CA-364E-497D-8D99-88F596AE02C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{633ED9CA-364E-497D-8D99-88F596AE02C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{633ED9CA-364E-497D-8D99-88F596AE02C8}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -8,9 +8,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContratacaoService.Domain",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContratacaoService.Infrastructure", "ContratacaoService.Infrastructure\ContratacaoService.Infrastructure.csproj", "{BB071480-49CB-4DBC-AE99-D6D2A5D41944}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContratacaoService.Test", "ContratacaoService.Test\ContratacaoService.Test.csproj", "{4718C3CE-D876-41D5-AAA9-4D6686B75947}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContratacaoService.CrossCutting.IoC", "ContratacaoService.CrossCutting.IoC\ContratacaoService.CrossCutting.IoC.csproj", "{167DA19A-B0DE-4D6A-A12C-C41A7212D056}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContratacaoService.UnitTests", "ContratacaoService.UnitTests\ContratacaoService.UnitTests.csproj", "{450E73F2-2034-4538-9FCA-1DD6FFB0557E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,13 +34,13 @@ Global
 		{BB071480-49CB-4DBC-AE99-D6D2A5D41944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB071480-49CB-4DBC-AE99-D6D2A5D41944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB071480-49CB-4DBC-AE99-D6D2A5D41944}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4718C3CE-D876-41D5-AAA9-4D6686B75947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4718C3CE-D876-41D5-AAA9-4D6686B75947}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4718C3CE-D876-41D5-AAA9-4D6686B75947}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4718C3CE-D876-41D5-AAA9-4D6686B75947}.Release|Any CPU.Build.0 = Release|Any CPU
 		{167DA19A-B0DE-4D6A-A12C-C41A7212D056}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{167DA19A-B0DE-4D6A-A12C-C41A7212D056}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{167DA19A-B0DE-4D6A-A12C-C41A7212D056}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{167DA19A-B0DE-4D6A-A12C-C41A7212D056}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450E73F2-2034-4538-9FCA-1DD6FFB0557E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450E73F2-2034-4538-9FCA-1DD6FFB0557E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450E73F2-2034-4538-9FCA-1DD6FFB0557E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450E73F2-2034-4538-9FCA-1DD6FFB0557E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
