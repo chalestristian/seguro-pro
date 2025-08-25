@@ -1,0 +1,60 @@
+services:
+  proposta-db:
+    image: postgres:15
+    container_name: proposta-database
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=proposta_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - proposta-data:/var/lib/postgresql/data
+      - ./db-scripts/proposta:/docker-entrypoint-initdb.d
+
+  propostaservice:
+    container_name: proposta-service
+    build:
+      context: PropostaService
+      dockerfile: Dockerfile
+    ports:
+      - "5001:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=proposta-db;Database=proposta_db;Username=user;Password=password
+    depends_on:
+      - proposta-db
+
+  contratacao-db:
+    image: postgres:15
+    container_name: contratacao-database
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=contratacao_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - contratacao-data:/var/lib/postgresql/data
+      - ./db-scripts/contratacao:/docker-entrypoint-initdb.d
+
+  contratacaoservice:
+    container_name: contratacao-service
+    build:
+      context: ContratacaoService
+      dockerfile: Dockerfile
+    ports:
+      - "5002:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=contratacao-db;Database=contratacao_db;Username=user;Password=password
+      - Services__PropostaServiceUrl=http://propostaservice:8080
+    depends_on:
+      - contratacao-db
+      - propostaservice
+
+volumes:
+  proposta-data:
+  contratacao-data:
