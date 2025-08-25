@@ -60,6 +60,20 @@ public class ListarPropostasQueryHandlerTests
     }
 
     [Fact]
+    public async Task Handle_QuandoPropostaNaoEncontrada_DeveRetornarNotFound()
+    {
+        var query = new ListarPropostasQuery();
+        List<Proposta> propostasDoDominio = null;
+        _mockPropostaRepository.Setup(r => r.BuscarAsync()).ReturnsAsync(propostasDoDominio);
+        
+        var result = await _handler.Handle(query, CancellationToken.None);
+
+        result.Sucesso.Should().BeFalse();
+        result.StatusCode.Should().Be((int)HttpStatusCode.NotFound);
+        result.Mensagem.Should().Be(MensagensErroApplication.Validation.PropostasNaoEncontrada);
+    }
+    
+    [Fact]
     public async Task Handle_QuandoRepositorioLancaExcecao_DeveLogarErroERetornarInternalServerError()
     {
         var query = new ListarPropostasQuery();

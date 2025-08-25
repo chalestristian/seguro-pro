@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PropostaService.Application.Common.Wrappers;
 using PropostaService.Application.DTOs;
 using PropostaService.Application.Features.AprovarProposta;
+using PropostaService.Application.Features.BuscaPorId;
 using PropostaService.Application.Features.CriarProposta;
 using PropostaService.Application.Features.ListarPropostas;
 using PropostaService.Application.Features.RejeitarProposta;
@@ -31,6 +32,13 @@ public class PropostasController : ControllerBase
     public async Task<ActionResult<ApplicationResult<PropostaResponse>>> Buscar()
     {
         var result = await _mediator.Send(new ListarPropostasQuery());
+        return StatusCode(result.StatusCode, result);
+    }
+    
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<ApplicationResult<PropostaResponse>>> BuscarPorId([FromRoute] Guid id)
+    {
+        var result = await _mediator.Send(new BuscaPropostaPorIdQuery(id));
         return StatusCode(result.StatusCode, result);
     }
     

@@ -24,6 +24,10 @@ public class ListarPropostasQueryHandler : IRequestHandler<ListarPropostasQuery,
         try
         {
             var propostas = await _propostaRepository.BuscarAsync(); 
+            
+            if(propostas is null) 
+                return ApplicationResult<IEnumerable<PropostaResponse>>.CriarResponseErro(MensagensErroApplication.Validation.PropostasNaoEncontrada, (int)HttpStatusCode.NotFound);
+
             return ApplicationResult<IEnumerable<PropostaResponse>>.CriarResponseSucesso(propostas.Select(p => new PropostaResponse(p.Id, p.NomeCliente, p.ValorSeguro, p.Status, p.Status.ToString(), p.DataCriacao)), (int)HttpStatusCode.OK);
         }
         catch (Exception ex)
