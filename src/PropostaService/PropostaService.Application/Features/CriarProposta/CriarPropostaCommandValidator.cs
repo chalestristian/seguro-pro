@@ -14,6 +14,7 @@ public class CriarPropostaCommandValidator : AbstractValidator<CriarPropostaComm
 
         RuleFor(p => p.CpfCliente)
             .NotEmpty().WithMessage(MensagensErroApplication.Validation.CpfClienteVazio)
+            .MaximumLength(11).WithMessage(MensagensErroApplication.Validation.CpfSemCaracteres)
             .Must(CpfValidator.IsValid).WithMessage(MensagensErroApplication.Validation.CpfClienteInvalido);
 
         RuleFor(p => p.ValorSeguro)
