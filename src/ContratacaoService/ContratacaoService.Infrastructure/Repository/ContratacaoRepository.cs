@@ -23,6 +23,11 @@ public class ContratacaoRepository : IContratacaoRepository
     {
         return await _context.Contratacoes.FindAsync(id);
     }
+    
+    public async Task<Contratacao?> BuscarPorPropostaIdAsync(Guid propostaId)
+    {
+        return await _context.Contratacoes.FirstOrDefaultAsync(x => x.PropostaId == propostaId);
+    }
 
     public async Task<IEnumerable<Contratacao>> ListarTodasAsync()
     {

@@ -38,6 +38,11 @@ public class ContratarPropostaCommandHandler : IRequestHandler<ContratarProposta
                 return ApplicationResult<ContratacaoResponse>.CriarResponseErro(string.Join("; ", errors), (int)HttpStatusCode.BadRequest);
             }
 
+            var propostaJaCadastrada = await _contratacaoRepository.BuscarPorPropostaIdAsync(command.PropostaId);
+            
+            if(propostaJaCadastrada is not null)
+                return ApplicationResult<ContratacaoResponse>.CriarResponseErro(MensagensErroApplication.PropostaJaCadastrada, (int)HttpStatusCode.Conflict);
+
             var propostaStatus = await _propostaGateway.GetPropostaStatusAsync(command.PropostaId);
 
             if (propostaStatus is null)

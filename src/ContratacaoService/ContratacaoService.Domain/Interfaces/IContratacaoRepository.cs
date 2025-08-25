@@ -8,4 +8,7 @@ public interface IContratacaoRepository{
     Task<Contratacao?> BuscarPorIdAsync(Guid id);
 
     Task<IEnumerable<Contratacao>> ListarTodasAsync();
+
+    public Task<Contratacao?> BuscarPorPropostaIdAsync(Guid propostaId);
+
 }
