@@ -24,6 +24,11 @@ public class PropostaRepository : IPropostaRepository
         return await _context.Propostas.SingleOrDefaultAsync(p => p.Id == id);
     }
 
+    public async Task<Proposta?> BuscarPeloCpfAsync(string cpf)
+    {
+        return await _context.Propostas.SingleOrDefaultAsync(p => p.CpfCliente == cpf);
+    }
+
     public async Task<IEnumerable<Proposta>> BuscarAsync()
     {
         return await _context.Propostas.AsNoTracking().ToListAsync();

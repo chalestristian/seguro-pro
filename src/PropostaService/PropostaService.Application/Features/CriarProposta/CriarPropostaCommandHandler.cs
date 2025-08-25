@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using PropostaService.Application.Common.Constants;
 using PropostaService.Application.Common.Wrappers;
 using PropostaService.Application.DTOs;
+using PropostaService.Domain.Common.Enum;
 using PropostaService.Domain.Entities;
 using PropostaService.Domain.Interfaces;
 
@@ -32,6 +33,11 @@ public class CriarPropostaCommandHandler : IRequestHandler<CriarPropostaCommand,
                 var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
                 return ApplicationResult<PropostaResponse>.CriarResponseErro(string.Join("; ", errors), (int)HttpStatusCode.BadRequest);
             }
+
+            var propostaExiste = await _propostaRepository.BuscarPeloCpfAsync(command.CpfCliente);
+
+            if (propostaExiste is not null && propostaExiste.Status == PropostaStatus.EmAnalise) 
+                return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Validation.PropostaJaExisteEmAnalise, (int)HttpStatusCode.Conflict);
             
             var proposta = Proposta.Criar(command.NomeCliente, command.CpfCliente, command.ValorSeguro);
 

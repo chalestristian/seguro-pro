@@ -12,6 +12,7 @@ public abstract class MensagensErroApplication
         public static readonly string CpfClienteVazio = "O CPF do cliente é obrigatório.";
         public static readonly string CpfClienteInvalido = "O formato do CPF informado é inválido.";
         public static readonly string ValorSeguroDeveSerPositivo = "O valor do seguro deve ser um número positivo.";
+        public static readonly string PropostaJaExisteEmAnalise = "Esse cliente já possue uma proposta aberta em analise.";
     }
     public static class Exception
     {
