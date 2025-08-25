@@ -7,7 +7,7 @@ using PropostaService.Application.DTOs;
 using PropostaService.Domain.Entities;
 using PropostaService.Domain.Interfaces;
 
-namespace PropostaService.Application.Features.Propostas.CriarProposta;
+namespace PropostaService.Application.Features.CriarProposta;
 
 public class CriarPropostaCommandHandler : IRequestHandler<CriarPropostaCommand, ApplicationResult<PropostaResponse>>
 {
@@ -40,7 +40,7 @@ public class CriarPropostaCommandHandler : IRequestHandler<CriarPropostaCommand,
             
             await _propostaRepository.CriarAsync(proposta.Data);
             
-            return ApplicationResult<PropostaResponse>.CriarResponseSucesso(new PropostaResponse(proposta.Data.Id, proposta.Data.ValorSeguro, proposta.Data.Status, proposta.Data.Status.ToString(), proposta.Data.DataCriacao), (int)HttpStatusCode.Created);
+            return ApplicationResult<PropostaResponse>.CriarResponseSucesso(new PropostaResponse(proposta.Data.Id, proposta.Data.NomeCliente, proposta.Data.ValorSeguro, proposta.Data.Status, proposta.Data.Status.ToString(), proposta.Data.DataCriacao), (int)HttpStatusCode.Created);
         }
         catch (Exception ex)
         {

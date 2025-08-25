@@ -2,7 +2,7 @@ using FluentValidation;
 using PropostaService.Application.Common.Constants;
 using PropostaService.Domain.Common.Wrappers;
 
-namespace PropostaService.Application.Features.Propostas.CriarProposta;
+namespace PropostaService.Application.Features.CriarProposta;
 
 public class CriarPropostaCommandValidator : AbstractValidator<CriarPropostaCommand>
 { 

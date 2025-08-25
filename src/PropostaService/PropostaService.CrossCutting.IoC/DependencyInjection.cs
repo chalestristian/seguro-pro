@@ -2,7 +2,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PropostaService.Application.Features.Propostas.CriarProposta;
+using PropostaService.Application.Features.CriarProposta;
 using PropostaService.Domain.Interfaces;
 using PropostaService.Infrastructure;
 using PropostaService.Infrastructure.Repository;
