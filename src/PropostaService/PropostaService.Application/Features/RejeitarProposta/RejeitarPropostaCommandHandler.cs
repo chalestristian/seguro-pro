@@ -49,7 +49,7 @@ public class RejeitarPropostaCommandHandler : IRequestHandler<RejeitarPropostaCo
         }
         catch (Exception ex)
         {   
-            _logger.LogError(MensagensErroApplication.Exception.ErroRejeitarProposta, ex);
+            _logger.LogError(ex, MensagensErroApplication.Exception.ErroRejeitarProposta);
             return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Exception.ErroInterno, (int)HttpStatusCode.InternalServerError);
         }
     }

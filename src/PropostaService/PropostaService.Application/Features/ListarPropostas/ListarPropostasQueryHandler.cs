@@ -28,7 +28,7 @@ public class ListarPropostasQueryHandler : IRequestHandler<ListarPropostasQuery,
         }
         catch (Exception ex)
         {
-            _logger.LogError(MensagensErroApplication.Exception.ErroListarPropostas, ex);
+            _logger.LogError(ex, MensagensErroApplication.Exception.ErroListarPropostas);
             return ApplicationResult<IEnumerable<PropostaResponse>>.CriarResponseErro(MensagensErroApplication.Exception.ErroInterno, (int)HttpStatusCode.InternalServerError);
         }
 

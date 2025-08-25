@@ -49,7 +49,7 @@ public class AprovarPropostaCommandHandler : IRequestHandler<AprovarPropostaComm
         }
         catch (Exception ex)
         {   
-            _logger.LogError(MensagensErroApplication.Exception.ErroAprovarProposta, ex);
+            _logger.LogError(ex, MensagensErroApplication.Exception.ErroAprovarProposta);
             return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Exception.ErroInterno, (int)HttpStatusCode.InternalServerError);
         }
     }

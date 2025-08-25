@@ -44,7 +44,7 @@ public class CriarPropostaCommandHandler : IRequestHandler<CriarPropostaCommand,
         }
         catch (Exception ex)
         {
-            _logger.LogError(MensagensErroApplication.Exception.ErroCriarProposta, ex);
+            _logger.LogError(ex, MensagensErroApplication.Exception.ErroCriarProposta);
             return ApplicationResult<PropostaResponse>.CriarResponseErro(MensagensErroApplication.Exception.ErroInterno, (int)HttpStatusCode.InternalServerError);
         }
     }
