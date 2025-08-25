@@ -13,7 +13,13 @@ public class MensagensErroApplication
     public static readonly string CpfInvalido = "O CPF informado não é valido.";
     public static readonly string ValorSeguroInvalido = "O valor do seguro deve ser maior que zero.";
 
+    public static readonly string IdVazio = "O ID da proposta é obrigatório e não pode ser vazio.";
+    
     public static readonly string NomeLongo = "O nome do cliente não pode ser vazio.";
+    
+    public static readonly string PropostaNaoEncontrada = "Não foi possível encontrar a proposta com o id informado.";
+
+    
 
 
 }
