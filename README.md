@@ -9,6 +9,7 @@
 
   <h2 align="center">Teste Técnico INDT – Arquitetura Hexagonal</h2>
 
+  <h3><a href="https://github.com/chalestristian/seguro-pro/tree/feature/aws-integration">BRANCH COM ARQUITETURA BASEADA EM EVENTOS: aws-integration</a></h3>
   <p align="center">
   Este projeto implementa uma plataforma simples de seguros utilizando Arquitetura Hexagonal (Ports & Adapters) e microserviços.
   </p>
@@ -16,9 +17,6 @@
     <img src="readme_img/DiagramaDeArquitetura.drawio.png" alt="Logo">
  </p>
 </div>
- 
-
-
 
 
 ## Sobre a proposta:
