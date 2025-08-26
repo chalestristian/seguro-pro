@@ -8,4 +8,5 @@ public interface IPropostaRepository
     Task<Proposta?> BuscarPeloCpfAsync(string cpf);
     Task<IEnumerable<Proposta>>? BuscarAsync();
     Task AtualizarAsync(Proposta proposta);
+    Task AtualizarComOutboxAsync(Proposta proposta, OutboxMessage outboxMessage);
 }

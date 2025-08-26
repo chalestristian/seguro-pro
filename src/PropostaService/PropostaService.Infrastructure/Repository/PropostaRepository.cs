@@ -39,4 +39,11 @@ public class PropostaRepository : IPropostaRepository
         _context.Propostas.Update(proposta);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task AtualizarComOutboxAsync(Proposta proposta, OutboxMessage outboxMessage)
+    {
+        _context.Propostas.Update(proposta);
+        await _context.OutboxMessages.AddAsync(outboxMessage);
+        await _context.SaveChangesAsync();
+    }
 }

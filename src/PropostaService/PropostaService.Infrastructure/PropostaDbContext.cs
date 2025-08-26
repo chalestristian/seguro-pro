@@ -8,7 +8,7 @@ public class PropostaDbContext: DbContext
 {
     public PropostaDbContext(DbContextOptions<PropostaDbContext> options) : base(options) { }
     public DbSet<Proposta> Propostas { get; set; }
-
+    public DbSet<OutboxMessage> OutboxMessages { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

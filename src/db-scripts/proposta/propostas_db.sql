@@ -7,3 +7,11 @@ CREATE TABLE IF NOT EXISTS public.propostas(
     data_criacao TIMESTAMP WITH TIME ZONE NOT NULL,
     data_atualizacao TIMESTAMP WITH TIME ZONE NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS public.outbox_messages (
+    id UUID PRIMARY KEY,
+    tipo VARCHAR(255) NOT NULL,
+    conteudo TEXT NOT NULL,
+    criado_em TIMESTAMP WITH TIME ZONE NOT NULL,
+    processado_em TIMESTAMP WITH TIME ZONE NULL
+);

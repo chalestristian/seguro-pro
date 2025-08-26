@@ -1,16 +1,4 @@
 services:
-  proposta-db:
-    image: postgres:15
-    container_name: proposta-database
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=proposta_db
-    ports:
-      - "5433:5432"
-    volumes:
-      - proposta-data:/var/lib/postgresql/data
-      - ./db-scripts/proposta:/docker-entrypoint-initdb.d
 
   propostaservice:
     container_name: proposta-service
@@ -22,22 +10,12 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
-      - ConnectionStrings__DefaultConnection=Host=proposta-db;Database=proposta_db;Username=user;Password=password
-    depends_on:
-      - proposta-db
+      - ConnectionStrings__DefaultConnection=${DEFAULT_PROPOSTA_CONNECTION}
+      - AWS_REGION=${AWS_REGION}
+      - SNS_PROPOSTA_EVENTS=${SNS_PROPOSTA_EVENTS}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
 
-  contratacao-db:
-    image: postgres:15
-    container_name: contratacao-database
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=contratacao_db
-    ports:
-      - "5434:5432"
-    volumes:
-      - contratacao-data:/var/lib/postgresql/data
-      - ./db-scripts/contratacao:/docker-entrypoint-initdb.d
 
   contratacaoservice:
     container_name: contratacao-service
@@ -49,12 +27,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
-      - ConnectionStrings__DefaultConnection=Host=contratacao-db;Database=contratacao_db;Username=user;Password=password
+      - ConnectionStrings__DefaultConnection=${DEFAULT_CONTRATACAO_CONNECTION}
       - Services__PropostaServiceUrl=http://propostaservice:8080
-    depends_on:
-      - contratacao-db
-      - propostaservice
-
-volumes:
-  proposta-data:
-  contratacao-data:
+      - SQS_PROPOSTA_EVENTS=${SQS_PROPOSTA_EVENTS}
+      - AWS_REGION=${AWS_REGION}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}

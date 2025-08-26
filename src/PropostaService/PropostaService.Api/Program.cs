@@ -1,6 +1,9 @@
+using DotNetEnv;
 using PropostaService.CrossCutting.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Env.Load();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 

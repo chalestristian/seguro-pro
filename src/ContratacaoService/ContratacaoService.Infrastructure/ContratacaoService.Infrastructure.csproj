@@ -7,9 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AWSSDK.Core" Version="4.0.0.25" />
+      <PackageReference Include="AWSSDK.SimpleNotificationService" Version="4.0.0.21" />
+      <PackageReference Include="AWSSDK.SQS" Version="4.0.1.1" />
+      <PackageReference Include="DotNetEnv" Version="3.1.1" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.8" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.8" />
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     </ItemGroup>
@@ -17,6 +22,15 @@
     <ItemGroup>
       <ProjectReference Include="..\ContratacaoService.Application\ContratacaoService.Application.csproj" />
       <ProjectReference Include="..\ContratacaoService.Domain\ContratacaoService.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="AWSSDK.SQS">
+        <HintPath>..\..\..\..\..\.nuget\packages\awssdk.sqs\4.0.1.1\lib\net8.0\AWSSDK.SQS.dll</HintPath>
+      </Reference>
+      <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+        <HintPath>..\..\..\..\..\.nuget\packages\microsoft.extensions.hosting.abstractions\9.0.8\lib\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

@@ -2,8 +2,6 @@ using System.Net;
 using ContratacaoService.Application.Common.Constants;
 using ContratacaoService.Application.Common.Wrappers;
 using ContratacaoService.Application.DTOs;
-using ContratacaoService.Application.Interfaces;
-using ContratacaoService.Domain.Common.Enum;
 using ContratacaoService.Domain.Entities;
 using ContratacaoService.Domain.Interfaces;
 using FluentValidation;
@@ -16,13 +14,11 @@ public class ContratarPropostaCommandHandler : IRequestHandler<ContratarProposta
 {
     private readonly IContratacaoRepository _contratacaoRepository;
     private readonly IValidator<ContratarPropostaCommand> _validator;
-    private readonly IPropostaServiceGateway _propostaGateway;
     private readonly ILogger<ContratarPropostaCommandHandler> _logger;
 
-    public ContratarPropostaCommandHandler(IContratacaoRepository contratacaoRepository, IValidator<ContratarPropostaCommand> validator, IPropostaServiceGateway propostaGateway, ILogger<ContratarPropostaCommandHandler> logger)
+    public ContratarPropostaCommandHandler(IContratacaoRepository contratacaoRepository, IValidator<ContratarPropostaCommand> validator, ILogger<ContratarPropostaCommandHandler> logger)
     {
         _contratacaoRepository = contratacaoRepository;
-        _propostaGateway = propostaGateway;
         _logger = logger;
         _validator = validator;
     }
@@ -42,14 +38,9 @@ public class ContratarPropostaCommandHandler : IRequestHandler<ContratarProposta
             
             if(propostaJaCadastrada is not null)
                 return ApplicationResult<ContratacaoResponse>.CriarResponseErro(MensagensErroApplication.PropostaJaCadastrada, (int)HttpStatusCode.Conflict);
-
-            var propostaStatus = await _propostaGateway.GetPropostaStatusAsync(command.PropostaId);
-
-            if (propostaStatus is null)
-                return ApplicationResult<ContratacaoResponse>.CriarResponseErro(MensagensErroApplication.PropostaNaoEncontrada, (int)HttpStatusCode.NotFound);
-           
-            if (propostaStatus.StatusProposta != (int)PropostaStatus.Aprovada)
-                return ApplicationResult<ContratacaoResponse>.CriarResponseErro(MensagensErroApplication.PropostaNaoAprovada, (int)HttpStatusCode.BadRequest);
+            
+            if(!await _contratacaoRepository.VerificarSePropostaEstaDisponivelAsync(command.PropostaId))
+                return ApplicationResult<ContratacaoResponse>.CriarResponseErro(MensagensErroApplication.PropostaNaoDisponivel, (int)HttpStatusCode.Conflict);
             
             var contratacao = Contratacao.Contratar(command.PropostaId);
             

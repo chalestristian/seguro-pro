@@ -10,16 +10,25 @@
   <h2 align="center">Teste Técnico INDT – Arquitetura Hexagonal</h2>
 
   <p align="center">
-  Este projeto implementa uma plataforma simples de seguros utilizando Arquitetura Hexagonal (Ports & Adapters) e microserviços.
+  Este projeto implementa uma plataforma simples de seguros utilizando Arquitetura Hexagonal (Ports & Adapters) e microserviços publicados na aws.
   </p>
    <p>
-    <img src="readme_img/DiagramaDeArquitetura.drawio.png" alt="Logo">
+    <img src="readme_img/aws.drawio.png" alt="Logo">
  </p>
 </div>
  
 
+## Componentes principais
 
+**Amazon ECS (Fargate):** Executa nossos serviços em contêineres sem necessidade de gerenciar servidores.
 
+**Contratacao Service:** Serviço responsável por gerenciar contratações, persiste dados no Amazon RDS.
+
+**Proposta Service:** Serviço responsável pelo fluxo de propostas e publicação de eventos no SNS.
+
+**Amazon SNS + SQS:** Arquitetura baseada em eventos, permitindo que o Contratacao Service consuma eventos de propostas aprovadas de forma assíncrona e escalável.
+
+*Nota: Nesta versão, não foi utilizado o API Gateway. O tráfego é direcionado diretamente aos serviços internos dentro da VPC, mantendo a comunicação segura e isolada.*
 
 ## Sobre a proposta:
 

@@ -7,6 +7,7 @@ namespace ContratacaoService.Infrastructure.Data.Repositories;
 public class ContratacaoRepository : IContratacaoRepository
 {
     private readonly ContratacaoDbContext _context;
+    
 
     public ContratacaoRepository(ContratacaoDbContext context)
     {
@@ -32,5 +33,16 @@ public class ContratacaoRepository : IContratacaoRepository
     public async Task<IEnumerable<Contratacao>> ListarTodasAsync()
     {
         return await _context.Contratacoes.AsNoTracking().ToListAsync();
+    }
+    
+    public async Task AdicionarPropostaElegivelAsync(PropostaElegivel propostaElegivel)
+    {
+            await _context.PropostaElegivel.AddAsync(propostaElegivel);
+            await _context.SaveChangesAsync();
+    }
+
+    public async Task<bool> VerificarSePropostaEstaDisponivelAsync(Guid propostaId)
+    {
+        return await _context.PropostaElegivel.AnyAsync(p => p.PropostaId == propostaId);
     }
 }

@@ -1,9 +1,10 @@
+using Amazon.SimpleNotificationService;
+using Amazon.SQS;
 using ContratacaoService.Application.Features.ContratarProposta;
-using ContratacaoService.Application.Interfaces;
 using ContratacaoService.Domain.Interfaces;
 using ContratacaoService.Infrastructure;
+using ContratacaoService.Infrastructure.Consumidor;
 using ContratacaoService.Infrastructure.Data.Repositories;
-using ContratacaoService.Infrastructure.Gateways;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,18 +16,18 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = Environment.GetEnvironmentVariable("DEFAULT_CONTRATACAO_CONNECTION")!;
         services.AddDbContext<ContratacaoDbContext>(options => options.UseNpgsql(connectionString));
-       
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ContratarPropostaCommand).Assembly));
         services.AddValidatorsFromAssembly(typeof(ContratarPropostaCommand).Assembly);
         services.AddScoped<IContratacaoRepository, ContratacaoRepository>();
-        services.AddScoped<IPropostaServiceGateway, PropostaServiceGateway>();
-        var a = configuration["Services:PropostaServiceUrl"];
         services.AddHttpClient("PropostaService", client =>
         {
-            client.BaseAddress = new Uri(configuration["Services:PropostaServiceUrl"]);
+            client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("PROPOSTA_SERVICE_URL")!);
         });
+        services.AddDefaultAWSOptions(configuration.GetAWSOptions());
+        services.AddAWSService<IAmazonSQS>();
+        services.AddHostedService<PropostaAprovadaConsumer>();
         return services;
     }
 }

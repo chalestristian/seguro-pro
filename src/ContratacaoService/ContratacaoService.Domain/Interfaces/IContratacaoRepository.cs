@@ -10,5 +10,8 @@ public interface IContratacaoRepository{
     Task<IEnumerable<Contratacao>> ListarTodasAsync();
 
     public Task<Contratacao?> BuscarPorPropostaIdAsync(Guid propostaId);
+    
+    Task AdicionarPropostaElegivelAsync(PropostaElegivel propostaElegivel);
+    Task<bool> VerificarSePropostaEstaDisponivelAsync(Guid propostaId);
 
 }

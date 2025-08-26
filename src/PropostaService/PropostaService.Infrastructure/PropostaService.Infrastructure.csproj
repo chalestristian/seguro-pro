@@ -7,12 +7,22 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AWSSDK.SimpleNotificationService" Version="4.0.0.21" />
+      <PackageReference Include="DotNetEnv" Version="3.1.1" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.8" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PropostaService.Application\PropostaService.Application.csproj" />
       <ProjectReference Include="..\PropostaService.Domain\PropostaService.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+        <HintPath>..\..\..\..\..\.dotnet\shared\Microsoft.AspNetCore.App\8.0.18\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

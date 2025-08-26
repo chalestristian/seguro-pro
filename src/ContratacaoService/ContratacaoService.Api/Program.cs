@@ -1,6 +1,9 @@
 using ContratacaoService.CrossCutting.IoC;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Env.Load();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 

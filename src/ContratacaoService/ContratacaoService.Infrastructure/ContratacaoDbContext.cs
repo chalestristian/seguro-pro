@@ -8,6 +8,7 @@ public class ContratacaoDbContext : DbContext
 {
     public ContratacaoDbContext(DbContextOptions<ContratacaoDbContext> options) : base(options) { }
     public DbSet<Contratacao> Contratacoes { get; set; }
+    public DbSet<PropostaElegivel> PropostaElegivel { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
